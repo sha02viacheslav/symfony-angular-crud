@@ -1,0 +1,269 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+	{{ parent() }}
+	<div class="content-wrapper">
+		<div class="page-title">
+			<div class="row">
+				<div class="col-sm-6">
+					<h4 class="mb-0">
+						Dashboard</h4>
+				</div>
+				<div class="col-sm-6">
+					<ol class="breadcrumb pt-0 pr-0 float-left float-sm-right">
+						<li class="breadcrumb-item">
+							<a href="index.html" class="default-color">Home</a>
+						</li>
+						<li class="breadcrumb-item active">Dashboard</li>
+					</ol>
+				</div>
+			</div>
+		</div>
+		<!-- widgets -->
+		<div class="row">
+			<div class="col-xl-12 col-lg-6 col-md-6 mb-30">
+				<div class="card card-statistics h-100">
+					<div class="card-body">
+						<form action="{{ path('setDate') }}" method="post">
+							<div class="card-body datepicker-form col-xl-8">
+								<div class="row">
+									<div class='input-group date col-xl-4 display-years' data-date-format="dd-mm-yyyy" data-date="14-05-2020">
+										<input class="form-control" type='text' placeholder="From" name="startDate" id="startDate" value="{{startDate}}"/>
+										<span class="input-group-addon">
+											<i class="fa fa-calendar"></i>
+										</span>
+									</div>
+									<div class='input-group date col-xl-4 display-years' data-date-format="dd-mm-yyyy" data-date="14-05-2020">
+										<input class="form-control" type='text' placeholder="To" name="endDate" id="endDate" value="{{endDate}}"/>
+										<span class="input-group-addon">
+											<i class="fa fa-calendar"></i>
+										</span>
+									</div>
+									<div class='input-group col-xl-4'>
+										<input type="submit" class="button button-border small" value="SET DATE" style="margin-left:5px; margin-bottom: 5px;">
+										<a class="button black small" href="{{ path('resetDate') }}">RESET DATE</a>
+									</div>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-xl-4 col-lg-6 col-md-6 mb-30">
+				<div class="card card-statistics h-100">
+					<div class="card-body">
+						<div class="clearfix">
+							<div class="float-left">
+								<span class="text-danger">
+									<i class="fa fa-shopping-cart highlight-icon" aria-hidden="true"></i>
+								</span>
+							</div>
+							<div class="float-right text-right">
+								<p class="card-text text-dark">Orders</p>
+								<h4>{{salesNumbers}}</h4>
+							</div>
+						</div>
+						<p class="text-muted pt-3 mb-0 mt-2 border-top">
+							<i class="fa fa-exclamation-circle mr-1" aria-hidden="true"></i>Total sales
+						</p>
+					</div>
+				</div>
+			</div>
+			<div class="col-xl-4 col-lg-6 col-md-6 mb-30">
+				<div class="card card-statistics h-100">
+					<div class="card-body">
+						<div class="clearfix">
+							<div class="float-left">
+								<span class="text-success">
+									<i class="fa fa-dollar highlight-icon" aria-hidden="true"></i>
+								</span>
+							</div>
+							<div class="float-right text-right">
+								<p class="card-text text-dark">Money</p>
+								<h4>${{processedMoney}}</h4>
+							</div>
+						</div>
+						<p class="text-muted pt-3 mb-0 mt-2 border-top">
+							<i class="fa fa-bookmark-o mr-1" aria-hidden="true"></i>
+							Amount of Total Sales
+						</p>
+					</div>
+				</div>
+			</div>
+			<div class="col-xl-4 col-lg-6 col-md-6 mb-30">
+				<div class="card card-statistics h-100">
+					<div class="card-body">
+						<div class="clearfix">
+							<div class="float-left">
+								<span class="text-warning">
+									<i class="fa fa-dollar highlight-icon" aria-hidden="true"></i>
+								</span>
+							</div>
+							<div class="float-right text-right">
+								<p class="card-text text-dark">Unprocessed</p>
+								<h4>${{unprocessedMoney}}</h4>
+							</div>
+						</div>
+						<p class="text-muted pt-3 mb-0 mt-2 border-top">
+							<i class="fa fa-calendar mr-1" aria-hidden="true"></i>
+							Amount of Unprocessed
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- Orders Status widgets-->
+		<div class="row">
+			<div class="col-xl-4 mb-30">
+				<div class="card card-statistics h-100">
+					<div class="btn-group info-drop">
+						<button type="button" class="dropdown-toggle-split text-muted" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							<i class="ti-more"></i>
+						</button>
+						<div class="dropdown-menu">
+							<a class="dropdown-item" href="#">
+								<i class="text-primary ti-reload"></i>Refresh</a>
+							<a class="dropdown-item" href="#">
+								<i class="text-secondary ti-eye"></i>View all</a>
+						</div>
+					</div>
+					<div class="card-body">
+						<h5 class="card-title">Total Sales</h5>
+						<div id="bar-sales" style="height:320px;"></div>
+					</div>
+				</div>
+			</div>
+			<div class="col-xl-4 mb-30">
+				<div class="card card-statistics h-100">
+					<div class="btn-group info-drop">
+						<button type="button" class="dropdown-toggle-split text-muted" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							<i class="ti-more"></i>
+						</button>
+						<div class="dropdown-menu">
+							<a class="dropdown-item" href="#">
+								<i class="text-primary ti-reload"></i>Refresh</a>
+							<a class="dropdown-item" href="#">
+								<i class="text-secondary ti-eye"></i>View all</a>
+						</div>
+					</div>
+					<div class="card-body">
+						<h5 class="card-title">Amount of Total Sales</h5>
+						<div id="bar-sales-amount"></div>
+					</div>
+				</div>
+			</div>
+			<div class="col-xl-4 mb-30">
+				<div class="card card-statistics h-100">
+					<div class="btn-group info-drop">
+						<button type="button" class="dropdown-toggle-split text-muted" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							<i class="ti-more"></i>
+						</button>
+						<div class="dropdown-menu">
+							<a class="dropdown-item" href="#">
+								<i class="text-primary ti-reload"></i>Refresh</a>
+							<a class="dropdown-item" href="#">
+								<i class="text-secondary ti-eye"></i>View all</a>
+						</div>
+					</div>
+					<div class="card-body">
+						<h5 class="card-title">Amount of Unprocessed</h5>
+						<div id="bar-unprocessed-amount"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<footer class="bg-white p-4">
+			<div class="row">
+				<div class="col-md-6">
+					<div class="text-center text-md-left">
+						<p class="mb-0">
+							&copy; Copyright
+							<span id="copyright">
+								<script>
+									document.getElementById('copyright').appendChild(document.createTextNode(new Date().getFullYear()))
+								</script>
+							</span>.
+							<a href="#">
+								Webmin
+							</a>
+							All Rights Reserved.
+						</p>
+					</div>
+				</div>
+				<div class="col-md-6">
+					<ul class="text-center text-md-right">
+						<li class="list-inline-item">
+							<a href="#">Terms & Conditions
+							</a>
+						</li>
+						<li class="list-inline-item">
+							<a href="#">API Use Policy
+							</a>
+						</li>
+						<li class="list-inline-item">
+							<a href="#">Privacy Policy
+							</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</footer>
+	</div>
+</div></div></div>{% endblock %}{% block javascripts %}{{ parent() }}<script>var sales = [];
+var processedSales = [];
+var unProcessedSales = [];
+var salesPrice = 0;
+var salesNumber = 0;
+var unprocessedPrice = 0;</script>{% if processedOrders is empty %}{% for i in range(startDate|date("U"), endDate|date("U"), 86400) %}
+<script>
+	sales.push({y: "{{ i|date('m/d') }}", a: salesNumber});
+processedSales.push({y: "{{ i|date('m/d') }}", b: salesPrice});
+</script>{% endfor %}{% endif %}{% if unProcessedOrders is empty %}{% for i in range(endDate|date("U"), endDate|date("U"), 86400) %}
+<script>
+	unProcessedSales.push({y: "{{ i|date('m/d') }}", c: unprocessedPrice});
+</script>{% endfor %}{% endif %}{% for i in range(startDate|date("U"), endDate|date("U"), 86400)  %}<script>
+salesNumber = 0;
+salesPrice = 0;</script>{% for processedOrder in processedOrders %}
+{% if i|date('m/d') == processedOrder.getProcessedAt|date("m/d") %}
+	<script>
+		salesNumber += 1;
+salesPrice += {{ processedOrder.getTotalPrice }};
+	</script>
+	{% set break = true %}
+{% endif %}{% endfor %}<script>
+sales.push({y: "{{ i|date('m/d') }}", a: salesNumber});
+processedSales.push({y: "{{ i|date('m/d') }}", b: salesPrice});</script>{% endfor %}{% for i in range(endDate|date("U"), today|date("U"), 86400) %}<script>
+unprocessedPrice = 0;</script>{% for unProcessedOrder in unProcessedOrders %}
+{% if i|date('m/d') == unProcessedOrder.getProcessedAt|date("m/d") %}
+	<script>
+		unprocessedPrice += {{ unProcessedOrder.getTotalPrice }};
+	</script>
+	{% set break = true %}
+{% endif %}{% endfor %}<script>
+unProcessedSales.push({y: "{{ i|date('m/d') }}", c: unprocessedPrice});</script>{% endfor %}<script>Morris.Bar({
+element: 'bar-sales',
+data: sales,
+xkey: 'y',
+ykeys: ['a'],
+labels: ['Sales Number'],
+barColors: ['#A4270C']
+});
+Morris.Bar({
+element: 'bar-sales-amount',
+data: processedSales,
+xkey: 'y',
+ykeys: ['b'],
+labels: ['Sales Price'],
+barColors: ['#0BC031']
+});
+Morris.Bar({
+element: 'bar-unprocessed-amount',
+data: unProcessedSales,
+xkey: 'y',
+ykeys: ['c'],
+labels: ['Unprocessed Sales Price'],
+barColors: ['#909321']
+});
+console.log(sales);</script>{% endblock %}

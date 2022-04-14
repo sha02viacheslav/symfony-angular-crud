@@ -1,0 +1,57 @@
+.button{
+  background-color:#fcdc59;
+  border-color:#344147;
+
+  &:hover{
+    background-color:#344147;
+    border-color:#fcdc59;
+  }
+}
+
+h1,h2,h3,h4,h5,h6{
+  color:#344147;
+}
+
+.remember-checkbox{
+  a{
+    color:#fcdc59;
+  }
+
+  label{
+    &:before,
+    &:after{
+      color:#fcdc59;
+    }
+  }
+}
+
+.side-menu-fixed{
+  .side-menu-bg{
+    background:#344147;
+
+  }
+
+  .side-menu{
+    background:#344147;
+  }
+}
+
+.button{
+  &.button-border{
+    color:#fcdc59;
+    border-color:#fcdc59;
+    &:hover{
+      background-color:#fcdc59;
+      border-color:#fcdc59;
+    }
+  }
+
+  &.black{
+    background-color:#344147;
+    border-color:#344147;
+    &:hover{
+      background-color: #fcdc59;
+      border-color:#fcdc59;
+    }
+  }
+}

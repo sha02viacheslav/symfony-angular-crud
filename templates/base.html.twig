@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="keywords" content="HTML5 Template" />
+        <meta name="description" content="Webmin - Bootstrap 4 & Angular 5 Admin Dashboard Template" />
+        <meta name="author" content="potenzaglobalsolutions.com" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+        <title>{% block title %}Purchase-It{% endblock %}</title>
+        {% block stylesheets %}
+            <link rel="shortcut icon" href="{{ asset('images/favicon.gif') }}" />
+            <link  rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:200,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900">
+            <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
+            <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+            <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css">
+            <link rel="stylesheet" type="text/css" href="{{ asset('css/style.css') }}" />
+            <link rel="stylesheet" type="text/css" href="{{ asset('css/mycustom.css') }}" />
+            <link rel="stylesheet" type="text/css" href="{{ asset('css/custom.css') }}" />
+        {% endblock %}
+    </head>
+    <body>
+        {% block body %}
+            <div class="wrapper"> 
+
+                <nav class="admin-header navbar navbar-default col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
+                <!-- logo -->
+                <div class="text-left navbar-brand-wrapper">
+                    <a class="navbar-brand brand-logo" 
+                        {% if app.user.getRoles[0] == 'ROLE_ADMIN' %}
+                            href="{{ path('adminDashboard') }}"
+                        {% elseif app.user.getRoles[0] == 'ROLE_CUSTOMER' %}
+                            href="{{ path('dashboard') }}"
+                        {% endif %}
+                    >
+                        <img src="{{ asset('images/purchase.png') }}" alt="" >
+                    </a>
+                    <a class="navbar-brand brand-logo-mini" href="index.html"><img src="{{ asset('images/logo-icon-dark.png') }}" alt=""></a>
+                </div>
+
+                <!-- top bar right -->
+                <ul class="nav navbar-nav ml-auto">
+
+                    <li class="nav-item dropdown ">
+                    <a class="nav-link top-nav" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                        <i class="ti-bell"></i>
+                        <span class="badge badge-danger notification-status"> </span>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right dropdown-big dropdown-notifications">
+                        <div class="dropdown-header notifications">
+                        <strong>Notifications</strong>
+                        <span class="badge badge-pill badge-warning">05</span>
+                        </div>
+                        <div class="dropdown-divider"></div>
+                        <a href="#" class="dropdown-item">New registered user <small class="float-right text-muted time">Just now</small> </a>
+                        <a href="#" class="dropdown-item">New invoice received <small class="float-right text-muted time">22 mins</small> </a>
+                        <a href="#" class="dropdown-item">Server error report<small class="float-right text-muted time">7 hrs</small> </a>
+                        <a href="#" class="dropdown-item">Database report<small class="float-right text-muted time">1 days</small> </a>
+                        <a href="#" class="dropdown-item">Order confirmation<small class="float-right text-muted time">2 days</small> </a>
+                    </div>
+                    </li>
+
+                    <li class="nav-item dropdown mr-30">
+                    <a class="nav-link nav-pill user-avatar" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                        <img src="{{ asset('images/profile-avatar.jpg') }}" alt="avatar">
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right" style="left:-220px !important;">
+                        <div class="dropdown-header">
+                        <div class="media">
+                            <div class="media-body">
+                                {% if app.user %}
+                                    <h5 class="mt-0 mb-0">{{ app.user.firstname }} {{ app.user.lastname }}</h5>
+                                    <span>{{ app.user.username }}</span>
+                                {% endif %}
+                            </div>
+                        </div>
+                        </div>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#"><i class="text-warning ti-user"></i>Profile</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="{{ path('app_logout') }}"><i class="text-danger ti-unlock"></i>Logout</a>
+                    </div>
+                    </li>
+                </ul>
+                </nav>
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="side-menu-fixed">
+                            <div class="scrollbar side-menu-bg">
+                                <ul class="nav navbar-nav side-menu" id="sidebarnav">
+                                    <!-- menu item table -->
+                                    <li>
+                                        <a 
+                                            {% if app.user.getRoles[0] == 'ROLE_ADMIN' %}
+                                                href="{{ path('adminDashboard') }}"
+                                            {% elseif app.user.getRoles[0] == 'ROLE_CUSTOMER' %}
+                                                href="{{ path('dashboard') }}"
+                                            {% endif %}
+                                        >
+                                            <i class="ti-home"></i><span class="right-nav-text">Dashboard</span> 
+                                        </a>
+                                    </li>
+                                    {% if app.user.getRoles[0] == "ROLE_ADMIN" %}
+                                        <li>
+                                            <a href="javascript:void(0);" data-toggle="collapse" data-target="#table">
+                                                <div class="pull-left"><i class="ti-layout-tab-window"></i><span class="right-nav-text">User data</span></div>
+                                                <div class="pull-right"><i class="ti-plus"></i></div><div class="clearfix"></div>
+                                            </a>
+                                            <ul id="table" class="collapse" data-parent="#sidebarnav">
+                                                <li> <a href="{{ path('customer') }}">Customer</a> </li>
+                                            </ul>
+                                        </li>
+                                        <li>
+                                            <a href="{{ path('orders') }}">
+                                                <i class="ti-menu-alt"></i><span class="right-nav-text">Orders List</span> 
+                                            </a>     
+                                        </li> 
+                                    {% elseif app.user.getRoles[0] == 'ROLE_CUSTOMER' %}
+                                        <li>
+                                            <a href="{{ path('order') }}">
+                                                <i class="ti-menu-alt"></i><span class="right-nav-text">Order</span> 
+                                            </a> 
+                                        </li> 
+                                        <li>
+                                            <a href="{{ path('subuser') }}">
+                                                <i class="ti-user"></i><span class="right-nav-text">Sub Users List</span> 
+                                            </a>
+                                        </li>
+                                        {% if app.user.getCustomer.getCanGenerateReports == "selected" %}
+                                            <li>
+                                                <a href="javascript:void(0);" data-toggle="collapse" data-target="#table">
+                                                    <div class="pull-left"><i class="fa fa-exchange"></i><span class="right-nav-text">Shopify Endpoints</span></div>
+                                                    <div class="pull-right"><i class="ti-plus"></i></div><div class="clearfix"></div>
+                                                </a>
+                                                <ul id="table" class="collapse" data-parent="#sidebarnav">
+                                                    <li> <a href="{{ path('ordersFromShopify') }}">Orders</a> </li>
+                                                    <li> <a href="{{ path('fullfillmentOrderFromShopify') }}">Fullfillment Order</a> </li>
+                                                    <li> <a href="{{ path('giftCardFromShopify') }}">Gift Card</a> </li>
+                                                </ul>
+                                            </li>
+                                        {% endif %}
+                                    {% endif %}          
+                                </ul>
+                            </div> 
+                        </div>     
+        {% endblock %}
+        {% block javascripts %}
+            <script src="{{ asset('js/jquery-3.3.1.min.js') }}"></script>
+
+            
+            <!-- plugins-jquery -->
+            <script src="{{ asset('js/plugins-jquery.js') }}"></script>
+
+            <!-- plugin_path -->
+            <script>var plugin_path = 'js/';</script>
+
+            <!-- chart -->
+            <script src="{{ asset('js/chart-init.js') }}"></script>
+
+            <!-- calendar -->
+            <script src="{{ asset('js/calendar.init.js') }}"></script>
+
+            <!-- charts sparkline -->
+            <script src="{{ asset('js/sparkline.init.js') }}"></script>
+
+            <!-- charts morris -->
+            <script src="{{ asset('js/morris.init.js') }}"></script>
+
+            <!-- datepicker -->
+            <script src="{{ asset('js/datepicker.js') }}"></script>
+
+            <!-- sweetalert2 -->
+            <script src="{{ asset('js/sweetalert2.js') }}"></script>
+
+            <!-- toastr -->
+            <script src="{{ asset('js/toastr.js') }}"></script>
+
+            <!-- validation -->
+            <script src="{{ asset('js/validation.js') }}"></script>
+
+            <!-- lobilist -->
+            
+            <!-- custom -->
+            <script src="{{ asset('js/custom.js') }}"></script>
+
+            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+            <script src="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+            
+            <script src="{{ asset('js/myJavascript.js') }}"></script>
+        {% endblock %}
+    </body>
+</html>

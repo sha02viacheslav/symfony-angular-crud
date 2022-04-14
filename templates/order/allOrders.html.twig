@@ -1,0 +1,94 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    {{ parent() }}
+        <div class="content-wrapper">
+            <div class="page-title">
+            <div class="row">
+                <div class="col-sm-6">
+                    <h4 class="mb-0">Orders List </h4>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb pt-0 pr-0 float-left float-sm-right ">
+                    <li class="breadcrumb-item"><a href="#" class="default-color">Home</a></li>
+                    <li class="breadcrumb-item active">Orders List </li>
+                    </ol>
+                </div>
+                </div>
+            </div>
+            <div class="row">
+                {% for message in app.flashes('success') %}
+                    <div class="alert alert-success message-box col-sm-6 offset-sm-3">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            </div>
+            <!-- main body --> 
+            <div class="row">   
+                <div class="col-xl-12 mb-30">     
+                    <div class="card card-statistics h-70"> 
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                            <table id="datatable" class="table table-striped table-bordered p-0">
+                                                <thead>
+                                                    <tr>
+                                                        <th>No</th>
+                                                        <th>Customer Identifier</th>
+                                                        <th>First Name</th>
+                                                        <th>Last Name</th>
+                                                        <th>Customer Email</th>
+                                                        <th>Process Date</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    {% for order in allOrders %}
+                                                        <tr>
+                                                            <td>{{loop.index}}</td>
+                                                            <td>{{order.getCustomer.getUser.getId}}</td>
+                                                            <td>{{order.getCustomer.getUser.getFirstName}}</td>
+                                                            <td>{{order.getCustomer.getUser.getLastName}}</td>
+                                                            <td>{{order.getCustomer.getUser.getEmail}}</td>
+                                                            <td>{{order.getProcessedAt|date('Y-m-d H:i:s')}}</td>
+                                                        </tr>
+                                                    {% endfor %}
+                                                </tbody>
+                                                <tfoot>
+                                                    <tr>
+                                                        <td>No</td>
+                                                        <td>Customer Identifier</td>
+                                                        <td>First Name</td>
+                                                        <td>Last Name</td>
+                                                        <td>Customer Email</td>
+                                                        <td>Process Date</td>
+                                                    </tr>
+                                                </tfoot>
+                                                
+                                            </table>
+                                        </div>
+                        </div>
+                    </div>   
+                </div>
+                <div class="col-xl-12 float-right text-right mb-30">
+                    <a class="button button-border black icon large" href="{{ path('csvAllorders') }}">RESULTS CSV</a>
+                </div>
+            </div> 
+                    <footer class="bg-white p-4">
+                        <div class="row">
+                            <div class="col-md-6">
+                            <div class="text-center text-md-left">
+                                <p class="mb-0"> &copy; Copyright <span id="copyright"> <script>document.getElementById('copyright').appendChild(document.createTextNode(new Date().getFullYear()))</script></span>. <a href="#"> Webmin </a> All Rights Reserved. </p>
+                            </div>
+                            </div>
+                            <div class="col-md-6">
+                            <ul class="text-center text-md-right">
+                                <li class="list-inline-item"><a href="#">Terms & Conditions </a> </li>
+                                <li class="list-inline-item"><a href="#">API Use Policy </a> </li>
+                                <li class="list-inline-item"><a href="#">Privacy Policy </a> </li>
+                            </ul>
+                            </div>
+                        </div>
+                    </footer>
+                </div><!-- main content wrapper end-->
+            </div>
+        </div>
+    </div>
+{% endblock %}

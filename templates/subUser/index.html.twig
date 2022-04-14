@@ -1,0 +1,111 @@
+
+{% extends 'base.html.twig' %}
+{% block body %}
+    {{ parent() }}
+        <div class="content-wrapper">
+            <div class="page-title">
+                <div class="row">
+                    <div class="col-sm-7">
+                        <h4 class="mb-0">Sub Users List </h4>
+                    </div>
+                    <div class="col-sm-3" style="text-align:center;">
+                        <a class="btn btn-danger" href="#" id="remove_subuser"><i class="fa fa-user-times"></i> Remove </a>
+                        <a class="btn btn-success" href="#addSubUserModal" data-toggle="modal"><i class="fa  fa-user-plus"></i> Add New SubUser</a>
+                    </div>
+                    <div class="col-sm-2">
+                        <ol class="breadcrumb pt-0 pr-0 float-left float-sm-right ">
+                        <li class="breadcrumb-item"><a href="#" class="default-color">Home</a></li>
+                        <li class="breadcrumb-item active">Sub Users List </li>
+                        </ol>
+                    </div>
+                    </div>
+                </div>
+                <div class="row">
+                    {% for message in app.flashes('success') %}
+                        <div class="alert alert-success message-box col-sm-6 offset-sm-3">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                </div>
+                <!-- main body --> 
+                <div class="row">   
+                    <div class="col-xl-12 mb-30">     
+                        <div class="card card-statistics h-70"> 
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    
+                                    <table id="datatable" class="table table-striped table-bordered p-0">
+                                        <thead>
+                                            <tr>
+                                                <th>
+                                                    <span class="custom-checkbox">
+                                                        <input type="checkbox" id="selectAll">
+                                                        <label for="selectAll"></label>
+                                                    </span>
+                                                </th>
+                                                <th>First Name</th>
+                                                <th>Last Name</th>
+                                                <th>Email</th>
+                                                <th style="text-align:center;">Actions</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% for subUser in subUsers %}
+                                                <tr>
+                                                    <td>
+                                                        <form action="{{ path('deleteSelSubuser') }}" method ="post" id="selected_subuser_del">
+                                                            <span class="custom-checkbox">
+                                                                <input type="checkbox" id="checkbox{{loop.index}}" name="options[]" value="{{subUser.getId}}">
+                                                                <label for="checkbox{{loop.index}}"></label>
+                                                            </span>
+                                                        </form>
+                                                    </td>
+                                                    <td>{{subUser.getFirstName}}</td>
+                                                    <td>{{subUser.getLastName}}</td>
+                                                    <td>{{subUser.getEmail}}</td>
+                                                    <td style="text-align:center;">
+                                                        <a href="#" class="edit" data-toggle="modal" id="{{subUser.getId}}" onclick="openSubUserEditModal(this.id)"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
+                                                        <a href="#deleteCustomerModal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
+                                                    </td>
+                                                </tr>
+                                                {% embed "subUser/editSubUserModal.html.twig"  
+                                                    with {'id': subUser.getId, 'firstName': subUser.getFirstName, 'lastName': subUser.getLastName, 
+                                                            'email': subUser.getEmail} 
+                                                %}
+                                                {% endembed %}
+                                                {% embed "subUser/deleteSubUserModal.html.twig" 
+                                                    with {'id': subUser.getId} 
+                                                %}
+                                                {% endembed %}
+                                            {% endfor %}
+
+                                        </tbody>    
+                                    </table>
+                                    {% embed "subUser/addSubUserModal.html.twig" %}
+                                    {% endembed %}
+                                </div>
+                            </div>
+                        </div>   
+                    </div>
+                </div> 
+                <footer class="bg-white p-4">
+                    <div class="row">
+                        <div class="col-md-6">
+                        <div class="text-center text-md-left">
+                            <p class="mb-0"> &copy; Copyright <span id="copyright"> <script>document.getElementById('copyright').appendChild(document.createTextNode(new Date().getFullYear()))</script></span>. <a href="#"> Webmin </a> All Rights Reserved. </p>
+                        </div>
+                        </div>
+                        <div class="col-md-6">
+                        <ul class="text-center text-md-right">
+                            <li class="list-inline-item"><a href="#">Terms & Conditions </a> </li>
+                            <li class="list-inline-item"><a href="#">API Use Policy </a> </li>
+                            <li class="list-inline-item"><a href="#">Privacy Policy </a> </li>
+                        </ul>
+                        </div>
+                    </div>
+                </footer>
+                    </div><!-- main content wrapper end-->
+            </div>
+        </div>
+    </div>
+{% endblock %}
