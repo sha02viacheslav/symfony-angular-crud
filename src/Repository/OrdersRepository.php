@@ -18,8 +18,8 @@ class OrdersRepository extends ServiceEntityRepository
     /**@var EntityManagerInterface */
     private $entityManager;
     /**
-    *@param EntityManagerInterface $entityManager
-    */
+     *@param EntityManagerInterface $entityManager
+     */
     public function __construct(ManagerRegistry $registry, EntityManagerInterface $entityManager)
     {
         $this->entityManager = $entityManager;
@@ -34,8 +34,8 @@ class OrdersRepository extends ServiceEntityRepository
         return $this->createQueryBuilder('o')
             ->where('o.customer LIKE :customer')
             ->orWhere('o.status LIKE :status')
-            ->setParameter('customer', '%'.$search. '%')
-            ->setParameter('status', '%'. $search. '%')
+            ->setParameter('customer', '%' . $search . '%')
+            ->setParameter('status', '%' . $search . '%')
             ->getQuery()
             ->getResult();
     }
@@ -45,5 +45,4 @@ class OrdersRepository extends ServiceEntityRepository
         $this->entityManager->persist($object);
         $this->entityManager->flush();
     }
-    
 }

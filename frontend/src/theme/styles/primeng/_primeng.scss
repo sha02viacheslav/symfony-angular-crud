@@ -1,0 +1,332 @@
+// Custom Theming for Prime Ng
+
+@import 'variables';
+
+@import 'primeng_accordion';
+@import 'primeng_autocomplete';
+@import 'primeng_avatar';
+@import 'primeng_breadcrumb';
+@import 'primeng_button';
+@import 'primeng_calendar';
+@import 'primeng_carousel';
+@import 'primeng_checkbox';
+@import 'primeng_chips';
+@import 'primeng_dialog';
+@import 'primeng_dropdown';
+@import 'primeng_editor';
+@import 'primeng_inputswitch';
+@import 'primeng_inputtext';
+@import 'primeng_listbox';
+@import 'primeng_menu';
+@import 'primeng_multiselect';
+@import 'primeng_overlaypanel';
+@import 'primeng_paginator';
+@import 'primeng_progressbar';
+@import 'primeng_radio';
+@import 'primeng_rating';
+@import 'primeng_selectbutton';
+@import 'primeng_table';
+@import 'primeng_tabmenu';
+@import 'primeng_tabview';
+@import 'primeng_timeline';
+@import 'primeng_toast';
+
+@mixin horizontal-form-field() {
+    flex-direction: row;
+    align-items: flex-start;
+    & > :nth-child(1) {
+        width: 30%;
+        padding-right: 24px;
+        margin-bottom: 0;
+        transform: translateY(calc(22px - 50%));
+
+        @media (min-width: 992px) {
+            padding-right: 40px;
+        }
+    }
+    & > :nth-child(2) {
+        width: 70%;
+    }
+    &.with-hint > :nth-child(1) {
+        transform: translateY(calc(47px - 50%));
+    }
+}
+
+// global
+.p-component {
+    font-family: $general-font-family;
+    font-size: $general-font-size;
+}
+
+// Icon input
+.p-input-icon-left > i:first-of-type {
+    color: $button-icon-color;
+}
+
+// Form helper
+.p-error,
+.p-invalid {
+    color: $invalid-color;
+}
+
+// sewn-form-field
+.sewn-form-field {
+    margin-bottom: 1rem;
+    display: inline-flex;
+    flex-direction: column;
+    @media (min-width: 768px) {
+        margin-bottom: 1.5rem;
+    }
+    .disabled,
+    .p-disabled,
+    .p-component:disabled {
+        background: $primary-bg-color !important;
+        opacity: $disabled-opacity;
+    }
+    .p-dropdown.p-disabled .p-dropdown-trigger-icon {
+        display: none;
+    }
+
+    & > label {
+        color: $general-text-color;
+        line-height: normal;
+        margin-bottom: 0.5rem;
+        font-weight: $fw-m;
+    }
+    .p-inputtext {
+        padding: 0.8125rem 0.75rem;
+        border-radius: 4px;
+        width: 100%;
+        line-height: normal;
+    }
+    .p-multiselect-label {
+        padding: 0.8125rem 0.75rem;
+        padding-right: 0;
+        line-height: normal;
+        &.p-placeholder {
+            line-height: normal;
+        }
+    }
+    .p-dropdown .p-inputtext {
+        padding-right: 0;
+    }
+    .p-inputnumber,
+    .p-calendar,
+    .p-multiselect {
+        width: 100%;
+    }
+
+    // Validation
+    .p-error {
+        display: none;
+        font-size: 14px;
+        font-weight: $fw-m;
+    }
+    .ng-invalid.ng-touched,
+    .ng-invalid.ng-dirty {
+        & + .p-error,
+        & ~ .p-error {
+            display: block !important;
+        }
+    }
+    .p-inputtext.ng-invalid.ng-touched,
+    input.ng-invalid.ng-touched,
+    input.ng-invalid.ng-touched + .input-group-append,
+    p-calendar.ng-invalid.ng-touched .p-calendar,
+    p-dropdown.ng-invalid.ng-touched .p-dropdown,
+    p-multiselect.ng-invalid.ng-touched .p-multiselect,
+    p-autocomplete.ng-invalid.ng-touched .p-autocomplete-input,
+    p-inputnumber.ng-invalid.ng-touched .p-inputnumber-input {
+        border-color: $error-border-color !important;
+    }
+
+    // Styles for inputgroup with custom addon
+    .p-inputgroup.custom-addon {
+        position: relative;
+        display: inline-block;
+        .p-inputgroup-addon {
+            position: absolute;
+            padding: 0 1rem;
+            margin: 0;
+            top: 1px;
+            right: 1px;
+            height: 43px;
+            border: none;
+            display: flex;
+            align-items: center;
+            color: $muted-text-color;
+            &.gray {
+                padding: 0 0.75rem;
+                background-color: $primary-bg-color;
+                border: none;
+                top: 4px;
+                right: 4px;
+                height: 37px;
+                border-radius: 4px;
+                color: $general-text-color;
+            }
+        }
+        .p-inputtext,
+        .p-inputnumber {
+            width: 100%;
+        }
+        &.left-align {
+            .p-inputgroup-addon {
+                left: 1px;
+                right: unset !important;
+                &.gray {
+                    left: 4px;
+                }
+            }
+            .p-inputtext,
+            .p-inputnumber-input {
+                padding-left: 4rem;
+            }
+        }
+        &:not(.left-align) {
+            .p-inputtext,
+            .p-inputnumber-input {
+                padding-right: 4rem;
+            }
+        }
+    }
+    // Input and select
+    .input-and-select {
+        position: relative;
+        .p-dropdown {
+            position: absolute;
+            top: 1px;
+            right: 1px;
+            border: none;
+            border-radius: 0;
+            border-left: 1px solid $primary-border-color;
+            margin: 0.5rem 0;
+            width: fit-content;
+            .p-inputtext {
+                padding: 0.4375rem 0 0.4375rem 0.75rem;
+            }
+            .p-dropdown-trigger {
+                padding-left: 8px;
+                padding-right: 12px;
+            }
+            .p-dropdown-panel {
+                max-width: unset;
+            }
+        }
+
+        &.gray {
+            .p-dropdown {
+                background-color: $primary-bg-color;
+                border: none;
+                top: 4px;
+                right: 4px;
+                height: 37px;
+                border-radius: 4px;
+                margin: 0;
+                display: flex;
+                align-items: center;
+                .p-inputtext {
+                    padding: 0.625rem 0 0.625rem 0.75rem;
+                    @media (max-width: 767px) {
+                        padding-top: 0.625rem;
+                        padding-bottom: 0.625rem;
+                    }
+                }
+            }
+        }
+    }
+
+    .p-autocomplete,
+    .p-dropdown {
+        width: 100%;
+    }
+
+    &.horizontal {
+        @include horizontal-form-field();
+    }
+    &.horizontal-md {
+        @media (min-width: 768px) {
+            @include horizontal-form-field();
+        }
+    }
+    &.horizontal-lg {
+        @media (min-width: 992px) {
+            @include horizontal-form-field();
+        }
+    }
+}
+
+.sewn-form-two-field {
+    display: inline-flex;
+    flex-direction: column;
+    .p-error {
+        color: #fff;
+    }
+
+    .ng-dirty + .p-error {
+        color: $invalid-color;
+    }
+}
+
+textarea {
+    &::placeholder,
+    &::-webkit-input-placeholder {
+        color: #8a8b9f !important;
+    }
+}
+
+.custom-search,
+.header-search {
+    position: relative;
+    &::before {
+        content: '\e908';
+        font-family: 'primeicons';
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        left: 16px;
+        font-size: 18px;
+    }
+    & > .p-inputtext {
+        padding-left: 3.125rem;
+        border-radius: 19px;
+    }
+}
+
+// Search auto complete
+.header-search {
+    @media (max-width: 767px) {
+        width: 100%;
+    }
+    & > .p-inputtext {
+        color: $general-text-color;
+        font-size: 16px;
+        font-weight: $fw-n;
+        width: 100%;
+        background: #f4f4f5 !important;
+        border-radius: 19px;
+        border: 1px solid transparent;
+        @media (min-width: 768px) {
+            width: 165px;
+        }
+    }
+    input::placeholder {
+        color: $button-icon-color !important;
+        font-size: 16px !important;
+        font-weight: $fw-n !important;
+    }
+}
+
+.p-inputwrapper-filled .header-search {
+    & > .p-inputtext {
+        border-color: $primary-color;
+    }
+}
+
+// Input group
+.p-inputgroup-addon {
+    background: transparent;
+    color: $general-text-color;
+    border-color: $primary-border-color !important;
+    font-weight: $fw-m;
+}

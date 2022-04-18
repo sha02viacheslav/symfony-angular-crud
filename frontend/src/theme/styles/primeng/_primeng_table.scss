@@ -1,0 +1,242 @@
+.p-datatable .p-datatable-thead > tr {
+    background-color: $primary-bg-color;
+    border-radius: 4px;
+    & > th {
+        padding: 1rem 0.625rem;
+        border: none;
+        border-radius: 0;
+        font-weight: $fw-b;
+        line-height: 18px;
+        color: $general-text-color;
+        background-color: transparent;
+        &:first-child {
+            padding-left: 1.625rem;
+            border-radius: 4px 0 0 4px;
+        }
+        &:last-child {
+            padding-right: 1.625rem;
+            border-radius: 0 4px 4px 0;
+        }
+    }
+}
+
+.tr-hover-visible {
+    visibility: hidden;
+}
+.p-datatable .p-datatable-tbody > tr {
+    border-bottom: 1px dashed $primary-border-color;
+    background-color: inherit;
+    &:hover {
+        background-color: transparent;
+        box-shadow: 0 4px 26px 2px rgba(0, 0, 0, 0.05);
+        cursor: pointer;
+        .tr-hover-visible {
+            visibility: visible;
+        }
+    }
+    &:last-child {
+        border: none;
+    }
+    & > td {
+        padding: 1.25rem 0.625rem;
+        background-color: inherit;
+        border: none;
+        line-height: 18px;
+        color: $general-text-color;
+        transition: box-shadow 0.2s;
+        overflow-wrap: break-word;
+        &:first-child {
+            padding-left: 1.625rem;
+        }
+        &:last-child {
+            padding-right: 1.625rem;
+        }
+    }
+}
+
+.p-datatable.p-datatable-hoverable-rows .p-datatable-tbody > tr:not(.p-highlight):hover {
+    background: $white;
+}
+
+.p-datatable .p-datatable-footer {
+    border: none;
+    padding: 0;
+}
+
+@media (min-width: 768px) {
+    .p-datatable:not(.border-none) {
+        border: 1px solid $secondary-border-color;
+        border-radius: 4px;
+        padding: 4px;
+    }
+
+    .p-datatable-responsive,
+    .p-datatable-responsive-single {
+        .p-datatable-tbody > tr > td {
+            .p-column-title,
+            .p-mobile-row-content {
+                display: none;
+            }
+        }
+    }
+}
+
+@media (max-width: 767px) {
+    .p-datatable.p-datatable-responsive-single {
+        .p-datatable-thead > tr > th,
+        .p-datatable-tfoot > tr > td {
+            display: none !important;
+        }
+
+        .p-datatable-tbody > tr {
+            box-shadow: none;
+        }
+
+        .p-datatable-tbody > tr > td {
+            padding: 1rem 0;
+            text-align: left;
+            display: block;
+            width: 100%;
+            float: left;
+            clear: left;
+            border-bottom: 1px dashed $primary-border-color;
+
+            .p-column-title {
+                display: inline-block;
+                width: 40%;
+                margin-right: 1rem;
+                color: $muted-text-color;
+            }
+
+            .p-mobile-row-content {
+                width: 100%;
+                display: block;
+            }
+
+            &:first-child {
+                padding-top: 0;
+            }
+
+            &:last-child {
+                padding-bottom: 0;
+                border-bottom: none;
+            }
+        }
+    }
+
+    .p-datatable.p-datatable-responsive {
+        .p-datatable-thead > tr > th,
+        .p-datatable-tfoot > tr > td {
+            display: none !important;
+        }
+
+        .p-datatable-tbody > tr {
+            padding: 4px 16px 0 16px;
+            box-shadow: none;
+            display: flow-root;
+            margin: 16px 0px 0px 0px;
+            border: solid 1px $secondary-border-color;
+            border-radius: 4px;
+            background-color: $white;
+            &:first-child {
+                margin: 0;
+            }
+        }
+
+        .p-datatable-tbody > tr > td {
+            padding: 1rem 0;
+            text-align: left;
+            display: flex;
+            width: 100% !important;
+            float: left;
+            clear: left;
+            &:not(.border-none) {
+                border-bottom: 2px dashed $primary-border-color !important;
+            }
+
+            // Style for column title
+            .p-column-title {
+                width: 40% !important;
+                display: inline-block !important;
+                margin: 0;
+                padding: 0;
+                padding-right: 1rem;
+                font-weight: $fw-n !important;
+                color: $muted-text-color;
+            }
+
+            // Style for column content
+            & > span:last-child {
+                flex: 1;
+            }
+
+            .p-mobile-row-content {
+                width: 100%;
+                display: block;
+            }
+
+            &:last-child {
+                border-bottom: none !important;
+            }
+        }
+    }
+
+    .mobile-card-view.p-datatable {
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            border: 0px;
+        }
+        .p-datatable-tbody > tr {
+            border-bottom: 1px dashed $primary-border-color;
+            border: solid 1px $secondary-border-color;
+            background-color: $white;
+        }
+        .p-datatable-tbody > tr > td:first-child {
+            width: calc(100% + 24px) !important;
+            margin: 0 -12px 0 -12px;
+            padding: 8px 12px;
+            background-color: $primary-bg-color;
+            border-radius: 4px;
+            border-bottom: none !important;
+        }
+        .p-tabview .p-tabview-panels {
+            border: none;
+            padding: 16px;
+            background: none;
+        }
+    }
+}
+
+// Scrollable
+.p-datatable-scrollable {
+    .p-datatable-scrollable-wrapper {
+        overflow-x: auto;
+        .p-datatable-scrollable-view {
+            min-width: 992px;
+        }
+    }
+}
+
+// Sort column
+.p-datatable .p-sortable-column:focus {
+    box-shadow: none;
+}
+.p-datatable .p-sortable-column:not(.p-highlight):hover,
+.p-datatable .p-sortable-column.p-highlight:hover,
+.p-datatable .p-sortable-column.p-highlight {
+    background: $primary-bg-color;
+    color: $general-text-color;
+}
+.p-datatable .p-sortable-column.p-highlight:hover .p-sortable-column-icon,
+.p-datatable .p-sortable-column.p-highlight .p-sortable-column-icon {
+    color: $general-text-color;
+}
+
+.p-sortable-column-icon.pi.pi-fw {
+    font-size: 14px;
+    margin-left: 0.25rem;
+    &.pi-sort-alt:before {
+        content: url('/assets/images/sort-icon.svg');
+    }
+}

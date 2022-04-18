@@ -1,0 +1,141 @@
+// SelectButton
+.p-selectbutton {
+    display: inline-flex;
+    border: solid 1px $primary-color;
+    font-size: inherit !important;
+    line-height: 1;
+    padding: 2px;
+    border-radius: 4px;
+}
+
+.p-selectbutton .p-button {
+    background: $white;
+    border: none;
+    color: $muted-text-color;
+}
+
+.p-buttonset .p-button:first-of-type,
+.p-buttonset .p-button:last-of-type {
+    border-radius: 4px !important;
+}
+
+.p-selectbutton .p-button.p-highlight,
+.p-selectbutton .p-button.p-highlight:not(.p-state-disabled):not(.p-state-active):hover {
+    background: $primary-color;
+    color: $white;
+}
+
+.p-selectbutton .p-button:not(.p-state-disabled):not(.p-state-active):hover {
+    background-color: transparent;
+    color: $general-text-color;
+}
+.p-selectbutton .p-button .p-button-label {
+    font-size: 12px;
+    line-height: 16px;
+    font-weight: $fw-m;
+}
+
+.select-layout {
+    &.p-selectbutton {
+        border: none;
+        background: #f0f0f0;
+        padding: 0;
+        border-radius: 20px;
+
+        .p-button {
+            background: transparent;
+            border: none;
+            width: 40px;
+            height: 40px;
+            padding: 0;
+            justify-content: center;
+            border-radius: 20px !important;
+            svg path {
+                fill: $general-text-color;
+            }
+        }
+        .p-button.p-highlight {
+            background: $dark-color;
+            svg path {
+                fill: #fff;
+            }
+        }
+        .p-button:not(.p-state-disabled):not(.p-state-active):hover {
+            background: transparent;
+            svg path {
+                fill: $general-text-color;
+            }
+        }
+        .p-button.p-highlight:not(.p-state-disabled):not(.p-state-active):hover {
+            background: $dark-color;
+            svg path {
+                fill: #fff;
+            }
+        }
+    }
+}
+
+.round-select {
+    &.p-selectbutton {
+        background: transparent;
+        border-color: $primary-border-color;
+        border-radius: 20px;
+        padding: 1px;
+
+        .p-button {
+            background: transparent;
+            border: none;
+            width: 36px;
+            height: 36px;
+            padding: 0;
+            justify-content: center;
+            border-radius: 18px !important;
+            color: $general-text-color;
+        }
+        .p-button.p-highlight {
+            background: $primary-color;
+            color: #fff;
+        }
+        .p-button:not(.p-state-disabled):not(.p-state-active):hover {
+            background: transparent;
+            color: $general-text-color;
+        }
+        .p-button.p-highlight:not(.p-state-disabled):not(.p-state-active):hover {
+            background: $primary-color;
+            color: #fff;
+        }
+    }
+}
+
+.p-selectbutton.p-selectbutton-prebook {
+    .p-button {
+        font-size: 12px;
+        padding: 6px 12px;
+    }
+}
+
+.p-selectbutton.p-selectbutton-milling-type {
+    border: none;
+    flex-wrap: wrap;
+    .p-button {
+        background-color: $primary-bg-color;
+        border-radius: 4px !important;
+        border: solid 1px $primary-border-color !important;
+        color: $muted-text-color;
+        font-size: 14px;
+        font-weight: $fw-m;
+        line-height: 1.57;
+        margin-right: 12px;
+        padding: 12px 22px;
+        white-space: nowrap;
+        margin-top: 12px;
+        &.p-highlight {
+            border: solid 1px $general-text-color !important;
+            background-color: $primary-bg-color;
+            color: $general-text-color;
+        }
+        &.p-disabled {
+            opacity: 1;
+        }
+    }
+}

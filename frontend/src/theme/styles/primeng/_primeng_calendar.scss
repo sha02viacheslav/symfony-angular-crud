@@ -1,0 +1,74 @@
+p-calendar {
+    .p-calendar {
+        width: 136px;
+    }
+}
+p-calendar[selectionmode='range'] {
+    .p-calendar {
+        width: 236px;
+    }
+}
+.p-calendar {
+    border: 1px solid $primary-border-color;
+    border-radius: 3px;
+    background: $white;
+    &:not(.p-calendar-disabled) {
+        &:hover,
+        &.highlight {
+            border-color: $primary-color;
+        }
+    }
+    &.p-calendar-disabled {
+        opacity: $disabled-opacity;
+        .p-component:disabled {
+            opacity: 1;
+        }
+    }
+}
+.round-border.p-calendar {
+    border-radius: 20px;
+}
+.p-calendar {
+    .p-inputtext {
+        border: none;
+        background: none;
+    }
+    .p-button {
+        color: $button-icon-color;
+        background-color: transparent;
+        border: none;
+        &:enabled:hover {
+            color: $button-icon-color;
+            background-color: transparent;
+        }
+    }
+    .p-button-icon {
+        font-size: 14px;
+    }
+}
+.p-calendar-w-btn .p-inputtext {
+    padding-right: 0;
+}
+
+// Date picker
+.p-datepicker table td {
+    padding: 0.1rem;
+}
+
+.p-datepicker .p-timepicker button:enabled:hover {
+    color: $primary-color;
+}
+
+// Time range
+.time-range {
+    border-radius: 3px;
+    border: 1px solid $primary-border-color;
+    background-color: $white;
+
+    &.opened {
+        border: 1px solid $primary-color;
+    }
+    .p-calendar {
+        border: none;
+    }
+}

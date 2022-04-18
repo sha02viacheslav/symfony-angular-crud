@@ -16,9 +16,9 @@ class OrderManagement
     /**@var OrdersRepository */
     private $ordersRepository;
 
-     /**@var EntityManagerInterface */
-     private $entityManager; 
-     
+    /**@var EntityManagerInterface */
+    private $entityManager;
+
     /**
      * @param OrdersRepository $ordersRepository
      * @param EntityManagerInterface $entityManager
@@ -26,14 +26,13 @@ class OrderManagement
     public function __construct(
         OrdersRepository $ordersRepository,
         EntityManagerInterface $entityManager
-    )
-    {
+    ) {
         $this->ordersRepository = $ordersRepository;
         $this->entityManager = $entityManager;
     }
 
     public function getOrdersBySearch($search)
-    {   
+    {
         $orders = $this->ordersRepository->findOrders($search);
         return $orders;
     }
@@ -44,6 +43,5 @@ class OrderManagement
         $updateOrder->status = $status;
         $this->ordersRepository->save($updateOrder);
         return true;
-
     }
 }

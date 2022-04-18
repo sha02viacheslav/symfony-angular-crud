@@ -1,0 +1,62 @@
+.p-timeline .p-timeline-event-connector {
+    background-color: transparent !important;
+    border: 1px dashed #d6d6d6;
+    position: relative;
+    top: -3px;
+    right: -94px;
+
+    @media only screen and (max-width: 40em) {
+        position: static;
+    }
+}
+.p-timeline-horizontal .p-timeline-event-connector {
+    width: 78% !important;
+}
+.p-timeline-horizontal .p-timeline-event:last-child .p-timeline-event-marker.ng-star-inserted {
+    background-image: url('https://cdn.zeplin.io/5ee0e1c97a4112987d39ea34/assets/CD592C95-2BD5-4284-B1E2-06C861FF9B92.svg');
+}
+.p-timeline .p-timeline-event-marker {
+    border: 0 none;
+    border-radius: 50%;
+    width: 60px;
+    height: 36px;
+    margin: 0 auto;
+    position: relative;
+    top: 14px;
+    float: none;
+    display: inline-block;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: transparent !important;
+    background-image: url('https://cdn.zeplin.io/5ee0e1c97a4112987d39ea34/assets/3FFFFDBB-4D49-4188-85F8-875AAC6D5544.svg');
+
+    @media only screen and (max-width: 40em) {
+        top: 0;
+    }
+}
+p-timeline {
+    padding: 0 2%;
+    display: block;
+}
+.p-timeline-horizontal .p-timeline-event:last-child {
+    flex: 1 !important;
+}
+.p-timeline-horizontal .p-timeline-event-separator {
+    flex-direction: column !important;
+}
+.p-timeline-left .p-timeline-event-content {
+    text-align: center !important;
+    font-size: 14px;
+    color: #232334;
+    font-weight: $fw-b;
+
+    @media only screen and (max-width: 40em) {
+        text-align: left !important;
+    }
+}
+
+@media only screen and (max-width: 40em) {
+    .p-timeline-event-opposite {
+        display: none;
+    }
+}

@@ -1,0 +1,51 @@
+@import 'variables';
+
+.forum-editor {
+    border: solid 1px $primary-border-color !important;
+    border-radius: 4px;
+    position: relative;
+    .p-editor-toolbar {
+        position: relative;
+        padding: 16px 24px;
+        background-color: white;
+        border: none !important;
+        &:before {
+            content: '';
+            display: block;
+            border-bottom: 1px dashed $primary-border-color;
+            position: absolute;
+            bottom: 0px;
+            width: calc(100% - 48px);
+        }
+    }
+    .p-editor-content {
+        background-color: white;
+        font-family: $general-font-family;
+        border: none !important;
+        .ql-editor {
+            padding: 24px;
+            overflow-y: auto;
+            resize: vertical;
+            &:before {
+                left: 24px;
+                font-family: $general-font-family;
+                font-style: normal;
+            }
+
+            &::-webkit-scrollbar {
+                width: 12px;
+            }
+
+            &::-webkit-scrollbar-track {
+                box-shadow: inset 0 0 3px rgba(0, 0, 0, 0.3);
+                border-radius: 0;
+            }
+
+            &::-webkit-scrollbar-thumb {
+                border-radius: 0;
+                background: #c1c1c1;
+                box-shadow: inset 0 0 3px #c1c1c1;
+            }
+        }
+    }
+}

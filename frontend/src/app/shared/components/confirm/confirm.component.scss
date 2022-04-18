@@ -1,0 +1,26 @@
+// Confirm dialog
+::ng-deep .confirm-dialog.p-dialog {
+    max-width: 450px;
+    padding: 0;
+    border-radius: 8px;
+
+    &.logout {
+        max-width: 590px;
+    }
+
+    & .p-dialog-content {
+        padding: 0;
+        border-radius: 8px;
+    }
+}
+
+.dialog-wrap {
+    padding: 48px 24px;
+    @media (min-width: 768px) {
+        padding: 80px 40px;
+    }
+}
+
+.content-wrap {
+    max-width: 75%;
+}

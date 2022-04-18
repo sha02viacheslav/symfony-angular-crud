@@ -34,11 +34,11 @@ class OrderController extends AbstractController
      * @param Request $request
      * @return JsonResponse
      */
-    public function getOrders(Request $request) : JsonResponse
-    {   
-        $search=$request->request->get('search');
-        $ordersList = $this->orderManagement->getOrdersBySearch($search);
-        return new JsonResponse(['status' => true, 'object' => $ordersList]);
+    public function getOrders(Request $request): JsonResponse
+    {
+        $query = $request->query->get('query');
+        $ordersList = $this->orderManagement->getOrdersBySearch($query);
+        return new JsonResponse(['success' => true, 'result' => $ordersList, 'result_info' => ['total_count' => count($ordersList)]]);
     }
 
     /**
@@ -46,11 +46,10 @@ class OrderController extends AbstractController
      * @param Request $request
      * @return JsonResponse
      */
-    public function cancelOrder(Request $request, $id) : JsonResponse
+    public function cancelOrder(Request $request, $id): JsonResponse
     {
         $status = $request->getContent();
         $cancelOrder = $this->orderManagement->updateStatus($id, $status);
-        return new JsonResponse(['status' => true, 'object' => $cancelOrder]);
-
+        return new JsonResponse(['success' => true, 'result' => $cancelOrder]);
     }
 }

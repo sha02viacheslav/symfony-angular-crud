@@ -1,0 +1,14 @@
+@import 'variables';
+
+.router-design {
+    background-color: $body-bg-color;
+    padding-top: calc(#{$mobile-page-pt});
+    padding-bottom: 16px;
+    @media (min-width: 768px) {
+        padding-top: calc(#{$tablet-page-pt});
+    }
+    @media (min-width: 992px) {
+        padding-top: calc(#{$desktop-page-pt});
+        padding-bottom: $desktop-page-pb;
+    }
+}

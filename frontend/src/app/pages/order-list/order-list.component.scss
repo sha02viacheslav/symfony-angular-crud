@@ -1,0 +1,22 @@
+:host ::ng-deep {
+    @media (min-width: 768px) {
+        .p-datatable .p-datatable-thead > tr > th {
+            padding: 1rem 0.25rem;
+            &:first-child {
+                padding-left: 1.25rem;
+            }
+            &:last-child {
+                padding-right: 1.25rem;
+            }
+        }
+        .p-datatable .p-datatable-tbody > tr > td {
+            padding: 1.25rem 0.25rem;
+            &:first-child {
+                padding-left: 1.25rem;
+            }
+            &:last-child {
+                padding-right: 1.25rem;
+            }
+        }
+    }
+}

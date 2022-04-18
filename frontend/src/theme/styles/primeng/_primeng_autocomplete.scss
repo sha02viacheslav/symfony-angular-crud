@@ -1,0 +1,58 @@
+.round-border.p-autocomplete .p-autocomplete-input {
+    border-radius: 20px;
+}
+.p-autocomplete-panel {
+    border: none;
+    padding: 4px;
+    margin-top: 8px;
+    border-radius: 2px;
+    box-shadow: 0 22px 34px 0 rgba(0, 0, 0, 0.08);
+}
+.p-autocomplete-panel .p-autocomplete-items .p-autocomplete-item {
+    color: $muted-text-color;
+    border-radius: 2px;
+    padding: 0.75rem 2rem 0.75rem 0.75rem;
+    font-weight: $fw-m;
+}
+.p-autocomplete-panel .p-autocomplete-items .p-autocomplete-item:not(.p-highlight):not(.p-disabled):hover {
+    color: $general-text-color;
+    background: $primary-bg-color;
+}
+.p-autocomplete-panel .p-autocomplete-items .p-autocomplete-item.p-highlight {
+    color: $general-text-color;
+    background: $primary-bg-color;
+}
+
+.p-autocomplete .p-autocomplete-multiple-container {
+    padding: 0.3125rem 0.625rem 0.0625rem !important;
+
+    &:not(.p-disabled):hover,
+    &:not(.p-disabled).p-focus {
+        box-shadow: none;
+        border-color: $primary-color;
+    }
+
+    .p-autocomplete-input-token {
+        padding: 0.5rem 0;
+        margin-bottom: 4px;
+        input {
+            font-size: 14px;
+            font-family: $general-font-family;
+            color: $muted-text-color;
+        }
+    }
+
+    .p-autocomplete-token {
+        padding: 0.5rem 1rem;
+        margin-right: 0.75rem;
+        margin-bottom: 4px;
+        background: rgba(116, 117, 136, 0.16);
+        color: $general-text-color;
+        border-radius: 17px;
+
+        .p-autocomplete-token-icon::before {
+            content: '\e90b';
+            color: $button-icon-color;
+        }
+    }
+}

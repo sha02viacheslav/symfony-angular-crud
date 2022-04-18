@@ -1,0 +1,92 @@
+<div class="mt-4 mb-4">
+    <div class="row v-gutter-16">
+        <div class="col-md-6 col-lg-4 order-1 order-md-2">
+            <div class="custom-search w-100">
+                <input
+                    class="w-100"
+                    [(ngModel)]="termSearch"
+                    (ngModelChange)="getData()"
+                    placeholder="Search by ID, Customer, Country"
+                    pInputText
+                />
+            </div>
+        </div>
+        <div class="col-md-6 col-lg-8 order-2 order-md-1">
+            <div class="fnt-18 fw-b">Order List</div>
+        </div>
+    </div>
+</div>
+
+<p-table
+    #myTable
+    [value]="tableValue"
+    [columns]="tableColumns"
+    dataKey="id"
+    [showCurrentPageReport]="false"
+    [paginator]="totalCount > rows"
+    [rows]="rows"
+    [loading]="isLoading"
+    [lazy]="false"
+    [lazyLoadOnInit]="false"
+    (onLazyLoad)="getData($event)"
+    [totalRecords]="totalCount"
+    selectionMode="multiple"
+    [responsive]="true"
+    [scrollable]="isTablet$ | async"
+    styleClass="mobile-card-view"
+>
+    <ng-template pTemplate="header" let-columns>
+        <tr>
+            <th
+                *ngFor="let col of columns"
+                [style.width]="col.width ? col.width + '%' : '30%'"
+                [pSortableColumn]="col.sortable ? col.field : null"
+            >
+                <span>{{ col.header }}</span>
+                <p-sortIcon *ngIf="col.sortable" [field]="col.field"> </p-sortIcon>
+            </th>
+        </tr>
+    </ng-template>
+
+    <ng-template pTemplate="body" let-rowData let-columns="columns">
+        <tr>
+            <td
+                *ngFor="let col of columns"
+                [ngSwitch]="col.field"
+                [style.width]="col.width ? col.width + '%' : '30%'"
+                [class.ellipsis]="col.field === 'roasting_profile_name'"
+            >
+                <span *ngIf="col.field !== 'id'" class="p-column-title">{{ col.header }}</span>
+                <span *ngSwitchCase="'id'">
+                    <span class="d-none d-md-inline-block">
+                        {{ rowData[col.field] }}
+                    </span>
+                    <div class="d-flex d-md-none align-items-center justify-content-between">
+                        <span class="fw-b">{{ col.header }}# {{ rowData[col.field] }}</span>
+                    </div>
+                </span>
+                <span *ngSwitchCase="'date'">
+                    {{ rowData[col.field] | date: 'dd MMM y' }}
+                </span>
+                <span *ngSwitchCase="'status'" class="status-badge" [ngClass]="rowData[col.field]">
+                    {{ rowData[col.field] | sentencecase }}
+                </span>
+                <span *ngSwitchCase="'lastModified'">
+                    {{ rowData[col.field] | date: 'dd MMM y' }}
+                </span>
+                <span *ngSwitchCase="'actions'">
+                    <div *ngIf="rowData.status == OrderStatus.PENDING" class="d-flex align-items-center">
+                        <span class="brown-cta mr-2" (click)="cancelOrder(rowData)">Cancel</span>
+                    </div>
+                </span>
+                <span *ngSwitchDefault>
+                    {{ rowData[col.field] || '-' }}
+                </span>
+            </td>
+        </tr>
+    </ng-template>
+
+    <ng-template pTemplate="summary">
+        <app-empty *ngIf="!isLoading && !tableValue?.length" title="No data available"></app-empty>
+    </ng-template>
+</p-table>

@@ -1,49 +1,35 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { ShowHidePasswordDirective } from './directive/show-hide-password.directive';
-import { ValidateEmailDirective } from './directive/validate-email.directive';
-import { NgxSpinnerModule } from 'ngx-spinner';
-import { ChangeStatusModalComponent } from './modals/change-status-modal/change-status-modal.component';
-import { NgxPaginationModule } from 'ngx-pagination';
-import { FilterPipe } from './pipe/filter.pipe';
-import { ShowHypenPipe } from './pipe/show-hypen.pipe';
-import { ManageOrderComponent } from './pages/manage-order/manage-order.component';
-import { DatePipe } from '@angular/common';
-import { INgxSelectOptions, NgxSelectModule } from 'ngx-select-ex';
-import { Ng2OrderModule } from 'ng2-order-pipe';
+import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import * as $ from "jquery";
-import { HeaderInterceptor } from './utils/HeaderInterceptor';
+import { ToastrModule } from 'ngx-toastr';
 
-const CustomSelectOptions: INgxSelectOptions = { // Check the interface for more options
-    optionValueField: 'id',
-    optionTextField: 'name',
-    keepSelectedItems: false
-};
+import { AppRoutingModule } from './app-routing.module';
+import { SharedModule } from '@shared';
+
+import { AppComponent } from './app.component';
+import { OrderListComponent } from './pages/order-list/order-list.component';
+
+import { ErrorInterceptor, HeaderInterceptor } from '@interceptors';
 
 @NgModule({
-    declarations: [
-        AppComponent,
-        ManageOrderComponent,
-        ChangeStatusModalComponent,
-        ShowHidePasswordDirective,
-        ValidateEmailDirective,
-        FilterPipe,
-        ShowHypenPipe,
-    ],
+    declarations: [AppComponent, OrderListComponent],
     imports: [
         BrowserModule,
+        BrowserAnimationsModule,
         AppRoutingModule,
         HttpClientModule,
         FormsModule,
-        NgxPaginationModule,
-        NgxSpinnerModule,
-        NgxSelectModule.forRoot(CustomSelectOptions),
-        Ng2OrderModule,
+        SharedModule,
+        ToastrModule.forRoot({
+            timeOut: 3000,
+            preventDuplicates: true,
+            positionClass: 'toast-bottom-right',
+            closeButton: true,
+            tapToDismiss: false,
+        }),
     ],
     providers: [
         {
@@ -51,8 +37,12 @@ const CustomSelectOptions: INgxSelectOptions = { // Check the interface for more
             useClass: HeaderInterceptor,
             multi: true,
         },
-        [DatePipe]
+        {
+            provide: HTTP_INTERCEPTORS,
+            useClass: ErrorInterceptor,
+            multi: true,
+        },
     ],
-    bootstrap: [AppComponent]
+    bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

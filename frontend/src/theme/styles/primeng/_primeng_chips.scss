@@ -1,0 +1,42 @@
+@import 'variables';
+
+.p-chips {
+    &.no-remove-icon {
+        .p-chips-token-icon {
+            display: none;
+        }
+    }
+    &.p-descriptors-chips {
+        margin-top: 0.5rem;
+
+        .p-chips-multiple-container {
+            padding: 0;
+
+            &.p-inputtext {
+                border: none;
+            }
+
+            &.p-focus {
+                border-color: transparent !important;
+                box-shadow: none !important;
+            }
+
+            .p-chips-token {
+                border-radius: 17px;
+                border: solid 1px #747588;
+                background-color: #747588;
+                padding: 0.5rem 0.75rem;
+                margin-bottom: 0.5rem;
+                font-weight: $fw-m;
+
+                .p-chips-token-icon::before {
+                    content: '\e90b';
+                }
+            }
+
+            .p-chips-input-token {
+                display: none;
+            }
+        }
+    }
+}

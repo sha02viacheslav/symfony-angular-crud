@@ -1,13 +1,7 @@
-<div class="sidebar" data-background-color="white" data-active-color="danger"></div>
-
-<div [ngClass]="storedTheme">
-  <router-outlet></router-outlet>
+<div class="container">
+    <div class="router-design">
+        <div class="main-block">
+            <router-outlet></router-outlet>
+        </div>
+    </div>
 </div>
-
-<div id="snackbar_module">
-  <h2 id="snack_msg" style="text-transform: capitalize !important;"></h2>
-</div>
-
-<ngx-spinner bdColor="rgb(0 60 193 / 70%)">
-  <img src='assets/images/loder.gif' />
-</ngx-spinner>
