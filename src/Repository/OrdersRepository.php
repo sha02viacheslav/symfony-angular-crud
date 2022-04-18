@@ -32,10 +32,12 @@ class OrdersRepository extends ServiceEntityRepository
     public function findOrders($search)
     {
         return $this->createQueryBuilder('o')
-            ->where('o.customer LIKE :customer')
-            ->orWhere('o.status LIKE :status')
+            ->where('o.id LIKE :id')
+            ->orWhere('o.customer LIKE :customer')
+            ->orWhere('o.country LIKE :country')
+            ->setParameter('id', '%' . $search . '%')
             ->setParameter('customer', '%' . $search . '%')
-            ->setParameter('status', '%' . $search . '%')
+            ->setParameter('country', '%' . $search . '%')
             ->getQuery()
             ->getResult();
     }
