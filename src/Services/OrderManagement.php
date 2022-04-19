@@ -31,9 +31,9 @@ class OrderManagement
         $this->entityManager = $entityManager;
     }
 
-    public function getOrdersBySearch($search)
+    public function getOrdersBySearch($search, $page, $per_page)
     {
-        $orders = $this->ordersRepository->findOrders($search);
+        $orders = $this->ordersRepository->findOrders($search, $page, $per_page);
         return $orders;
     }
 

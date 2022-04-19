@@ -36,9 +36,15 @@ class OrderController extends AbstractController
      */
     public function getOrders(Request $request): JsonResponse
     {
-        $query = $request->query->get('query');
-        $ordersList = $this->orderManagement->getOrdersBySearch($query);
-        return new JsonResponse(['success' => true, 'result' => $ordersList, 'result_info' => ['total_count' => count($ordersList)]]);
+        $search = $request->query->get('query');
+        $page = $request->query->get('page');
+        $per_page = $request->query->get('per_page');
+        $ordersList = $this->orderManagement->getOrdersBySearch($search, $page, $per_page);
+
+
+        $totalResult = $ordersList->count();
+        $items = $ordersList->getIterator()->getArrayCopy();
+        return new JsonResponse(['success' => true, 'result' => $items, 'result_info' => ['total_count' => $totalResult]]);
     }
 
     /**

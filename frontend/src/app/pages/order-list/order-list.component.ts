@@ -35,8 +35,7 @@ export class OrderListComponent extends ResizeableComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        this.tableColumns = [];
-        this.tableColumns = this.tableColumns.concat([
+        this.tableColumns = [
             {
                 field: 'id',
                 header: 'ID',
@@ -77,39 +76,37 @@ export class OrderListComponent extends ResizeableComponent implements OnInit {
                 header: 'Amount',
                 width: 8,
             },
-            {
-                field: 'status',
-                header: 'Status',
-                width: 10,
-            },
+            this.resizeService.isMobile()
+                ? null
+                : {
+                      field: 'status',
+                      header: 'Status',
+                      width: 10,
+                  },
             {
                 field: 'lastModified',
                 header: 'Last Modified',
                 width: 11,
             },
-            {
-                field: 'actions',
-                header: 'Action',
-                width: 8,
-            },
-        ]);
+            this.resizeService.isMobile()
+                ? null
+                : {
+                      field: 'actions',
+                      header: 'Action',
+                      width: 8,
+                  },
+        ].filter(Boolean);
 
         this.getData();
     }
 
     getData(event = null): void {
         const queryParams = {
-            sort_by: 'created_at',
-            sort_order: 'desc',
             page: 1,
             per_page: this.rows,
             query: this.termSearch,
         };
         if (event) {
-            if (event.sortField) {
-                queryParams.sort_by = event.sortField;
-                queryParams.sort_order = event.sortOrder === -1 ? 'desc' : 'asc';
-            }
             queryParams.page = event.first / event.rows + 1;
         }
         this.getOrders(queryParams);
@@ -121,14 +118,14 @@ export class OrderListComponent extends ResizeableComponent implements OnInit {
             (data: any) => {
                 if (data.success) {
                     this.tableValue = data.result;
-                    this.totalCount = data.result?.length;
+                    this.totalCount = data.result_info?.total_count;
                 } else {
-                    this.toastrService.error('Error while getting the roasted coffee batch list!');
+                    this.toastrService.error('Error while getting the orders!');
                 }
                 this.isLoading = false;
             },
             (err) => {
-                this.toastrService.error('Error while getting the roasted coffee batch list!');
+                this.toastrService.error('Error while getting the orders!');
             },
         );
     }

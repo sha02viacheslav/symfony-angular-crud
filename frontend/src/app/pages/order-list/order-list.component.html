@@ -26,7 +26,7 @@
     [paginator]="totalCount > rows"
     [rows]="rows"
     [loading]="isLoading"
-    [lazy]="false"
+    [lazy]="true"
     [lazyLoadOnInit]="false"
     (onLazyLoad)="getData($event)"
     [totalRecords]="totalCount"
@@ -62,7 +62,15 @@
                         {{ rowData[col.field] }}
                     </span>
                     <div class="d-flex d-md-none align-items-center justify-content-between">
-                        <span class="fw-b">{{ col.header }}# {{ rowData[col.field] }}</span>
+                        <div>
+                            <span class="fw-b mr-3">{{ col.header }} #{{ rowData[col.field] }}</span>
+                            <span class="status-badge" [ngClass]="rowData.status">
+                                {{ rowData.status | sentencecase }}
+                            </span>
+                        </div>
+                        <div *ngIf="rowData.status == OrderStatus.PENDING" class="d-flex align-items-center">
+                            <span class="brown-cta mr-2" (click)="cancelOrder(rowData)">Cancel</span>
+                        </div>
                     </div>
                 </span>
                 <span *ngSwitchCase="'date'">
