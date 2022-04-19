@@ -49,16 +49,6 @@ class OrdersRepository extends ServiceEntityRepository
         $paginator = new Paginator($query);
 
         return $paginator;
-
-        // return $this->createQueryBuilder('o')
-        //     ->where('o.id LIKE :id')
-        //     ->orWhere('o.customer LIKE :customer')
-        //     ->orWhere('o.country LIKE :country')
-        //     ->setParameter('id', '%' . $search . '%')
-        //     ->setParameter('customer', '%' . $search . '%')
-        //     ->setParameter('country', '%' . $search . '%')
-        //     ->getQuery()
-        //     ->getResult();
     }
 
     public function save($object)
