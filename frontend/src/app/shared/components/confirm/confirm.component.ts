@@ -16,6 +16,6 @@ export class ConfirmComponent implements OnInit {
     ngOnInit(): void {}
 
     close(value = null) {
-            this.ref.close(value);
+        this.ref.close(value);
     }
 }

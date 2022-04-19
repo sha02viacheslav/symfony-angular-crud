@@ -1,16 +1,14 @@
+import { OrderStatus } from '../enums/order';
+
 export interface Order {
-    batch_ref_no: string;
-    best_before_date: string;
-    currentStatus: string;
-    flavour_profiles: any;
-    gc_order_id: number;
-    green_coffee_quantity: number;
     id: number;
-    is_test_batch: boolean;
-    name: string;
-    order_ref_no: string;
-    roasted_coffee_quantity: number;
-    roasted_date: string;
-    roasting_profile_id: number;
-    roasting_profile_name: string;
+    date: string;
+    customer: string;
+    address1: string;
+    city: string;
+    postcode: string;
+    country: string;
+    amount: number;
+    status: OrderStatus;
+    lastModified: string;
 }

@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "order-app": {
+    "symfony-angular-app": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/order-app",
+            "outputPath": "dist/symfony-angular-app",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -96,21 +96,21 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "order-app:build"
+            "browserTarget": "symfony-angular-app:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "order-app:build:production"
+              "browserTarget": "symfony-angular-app:build:production"
             },
             "staging": {
-              "browserTarget": "order-app:build:staging"
+              "browserTarget": "symfony-angular-app:build:staging"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "order-app:build"
+            "browserTarget": "symfony-angular-app:build"
           }
         },
         "test": {
@@ -147,18 +147,18 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "order-app:serve"
+            "devServerTarget": "symfony-angular-app:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "order-app:serve:production"
+              "devServerTarget": "symfony-angular-app:serve:production"
             }
           }
         }
       }
     }
   },
-  "defaultProject": "order-app",
+  "defaultProject": "symfony-angular-app",
   "cli": {
     "analytics": "e8ab286f-908c-4aee-9705-fc0727b11d9b"
   }

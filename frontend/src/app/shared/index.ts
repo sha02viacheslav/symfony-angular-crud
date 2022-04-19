@@ -10,7 +10,6 @@ export * from './shared.module';
 
 // Pipes
 
-
 // Guards
 
 // Services
